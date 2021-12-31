@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="res\file_view.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\file_view_hc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\class_view.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\class_view_hc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\fileview.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\fileview_hc.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\classview.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\classview_hc.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\explorer.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\explorer_hc.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\sort.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\sort_hc.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\menuimages.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\menuimages_hc.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\output_wnd.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\output_wnd_hc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\properties_wnd.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\properties_wnd_hc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\properties.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\properties_hc.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="UserImages.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\My3DVisual.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\3DVisualDoc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\3DVisual.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Toolbar256.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="res\importdata.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\sliceplay.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\stopSliceplay.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\turnleft.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\verticalmirror.png">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\verticalmirror.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\horimirror.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\turnright.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\..\3DVisual-v3.11\3DVisual\res\turnright.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\anisotropy.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\median.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\gauss.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\template.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\mean.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\edge.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\mc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\surface.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\light.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\isovalue.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\docopen.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\docyes.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\docno.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\color.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\opaccity.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\save.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\capture.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\binary.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\sewindow.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\resetwindow.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\import.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\cut.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\stl.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\cutcancel.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\splash.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\yes_ok_16px_1075787_easyicon.net.ico">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3DVisual.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="3DVisualDoc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="3DVisualView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputWnd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertiesWnd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgVR.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMC.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BttmOneView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BttmTwoView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BttmThreeView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MySplitWnd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BttmView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vtkMFCWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgDicomOpen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgBmpOpen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPane.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ToosDockAblePane.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BtnST.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BCMenu.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgTemplate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSaveSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgCaptureSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgBinOpen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSaveStlSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashWnd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="3DVisual.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="3DVisualDoc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="3DVisualView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewTree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertiesWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgVR.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMC.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BttmOneView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BttmThreeView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MySplitWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BttmView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="vtkMFCWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BttmTwoView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgDicomOpen.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgBmpOpen.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPane.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ToosDockAblePane.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnST.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BCMenu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgTemplate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSaveSet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgCaptureSet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgBinOpen.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSaveStlSet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SplashWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="3DVisual.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
