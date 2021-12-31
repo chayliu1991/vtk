@@ -168,13 +168,14 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	lstBasicCommands.AddTail(ID_SORTING_GROUPBYTYPE);
 	CMFCToolBar::SetBasicCommands(lstBasicCommands);
 	////////////////////////////////////////////////
-	if (!m_toolpane.Create(_T(""), this, CRect(0, 0, 320, 1000), TRUE, IDD_DLG_PANE, WS_CHILD | 
-		WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | CBRS_RIGHT ))
-	{
-		TRACE0("Failed to create LeftPane\n");
-		return -1;
-	}
-	AddPane(&m_toolpane);//禁止Resize后需用AddPane
+	//if (!m_toolpane.Create(_T(""), this, CRect(0, 0, 320, 1000), TRUE, IDD_DLG_PANE, WS_CHILD | 
+	//	WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | CBRS_RIGHT ))
+	//{
+	//	TRACE0("Failed to create LeftPane\n");
+	//	return -1;
+	//}
+	//AddPane(&m_toolpane);//禁止Resize后需用AddPane
+
 	return 0;
 }
 
