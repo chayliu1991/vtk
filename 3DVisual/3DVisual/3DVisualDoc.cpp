@@ -41,7 +41,7 @@ UINT data_fg = 0;//标志是否读入数据以及数据的类型,等于0时表示当前无数据
 bool Dicom_fg = false;
 bool Bmp_fg = false;
 
-CMy3DVisualDoc::CMy3DVisualDoc()
+CMy3DVisualDoc::CMy3DVisualDoc() : m_pNrrdReader (nullptr)
 {
 	// TODO: 在此添加一次性构造代码
 	Dicomreader = NULL;
@@ -151,21 +151,27 @@ void CMy3DVisualDoc::Dump(CDumpContext& dc) const
 
 // CMy3DVisualDoc 命令
 
-
 void CMy3DVisualDoc::OnDicomopen()
 {
 	// TODO: 在此添加命令处理程序代码
 	CDlgDicomOpen m_DlgDicomImport;
 	if(m_DlgDicomImport.DoModal() == IDOK)
 	{
-		Dicomreader =  vtkSmartPointer<vtkDICOMImageReader>::New(); 
+		/*Dicomreader =  vtkSmartPointer<vtkDICOMImageReader>::New(); 
 		Dicomreader->SetDirectoryName(m_DlgDicomImport.m_DicomFolderName);
-		Dicomreader->Update();			
+		Dicomreader->Update();	
+*/
+		m_pNrrdReader = vtkSmartPointer<vtkNrrdReader>::New();
+		m_pNrrdReader->CanReadFile(m_DlgDicomImport.m_DicomFolderName);
+		m_pNrrdReader->Update();
+
+
+		
 		data_fg = 1;//等于1时表示当前的数据类型为Dicom
 		Dicom_fg = true;
 		Bmp_fg = false;
-		SetDicomSlice();
-		InitSliceDlg();
+	/*	SetDicomSlice();
+		InitSliceDlg();*/
 	}
 	else
 		return;

@@ -62,9 +62,9 @@ void CDlgDicomOpen::OnBnClickedBtndicomopen()
 	CString FilePathName = "";
 	CString FolderName = "";
 	CFileDialog fileDlg( TRUE, NULL, NULL,OFN_ALLOWMULTISELECT | OFN_ENABLESIZING | OFN_HIDEREADONLY,
-		(LPCTSTR)_TEXT("DICOM Files (*.dcm)|*.dcm||"),NULL );
+		(LPCTSTR)_TEXT("NRRD Files (*.nrrd)|*.nrrd||"),NULL );
 
-	const int MIN_FILE_NUMBER = 2000;     //至少允许选择1000个文件
+	const int MIN_FILE_NUMBER = 2000;     
 	fileDlg.m_ofn.lpstrFile = new TCHAR[_MAX_PATH * MIN_FILE_NUMBER]; //重新定义缓冲区大小          
 	memset(fileDlg.m_ofn.lpstrFile, 0, _MAX_PATH * MIN_FILE_NUMBER);  //初始化定义的缓冲区
 	fileDlg.m_ofn.nMaxFile = _MAX_PATH * MIN_FILE_NUMBER;

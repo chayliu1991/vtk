@@ -6,6 +6,7 @@
 #pragma once
 #include "vtkSmartPointer.h"
 #include <vtkDICOMImageReader.h>
+#include <vtkNrrdReader.h>
 #include "vtkBMPReader.h"
 #include "vtkImageResample.h"
 
@@ -58,6 +59,8 @@ protected:
 public:
 	vtkSmartPointer<vtkDICOMImageReader> Dicomreader;//DicomÎÄ¼þÖ¸Õë
 	vtkSmartPointer<vtkBMPReader> Bmpreader;	
+	vtkSmartPointer<vtkNrrdReader> m_pNrrdReader;
+
 	afx_msg void OnDicomopen();
 	void SetDicomSlice();
 	afx_msg void OnBmpopen();	
