@@ -158,9 +158,9 @@ void CBttmOneView::OnDestroy()
 
 void CBttmOneView::DisplaySlice1(vtkDataSet* input)
 {
-	//planeWight1->SetInput(input);
+	//planeWight1->SetInputData(input);
 	//planeWight1->SetPlaneOrientation(0);
-	//colorMap1->SetInput((vtkDataObject *)planeWight1->GetResliceOutput());
+	//colorMap1->SetInputData((vtkDataObject *)planeWight1->GetResliceOutput());
 	//colorMap1->SetLookupTable(planeWight1->GetLookupTable());
 	//imageData =	vtkImageData::SafeDownCast(planeWight1->GetInput());
 	//int extent[6];
@@ -181,7 +181,7 @@ void CBttmOneView::DisplaySlice1(vtkDataSet* input)
 	/////////////////////////////////////////////	
 	//Window = planeWight1->GetWindow();
 	//Level = planeWight1->GetLevel();
-	//m_SliceActor1->SetInput(colorMap1->GetOutput());
+	//m_SliceActor1->SetInputData(colorMap1->GetOutput());
 	//m_SliceRender1->AddActor(m_SliceActor1);	
 	//m_SliceRender1->ResetCamera();		
 	//vtkInteractorStyleImage* style = vtkInteractorStyleImage::New();

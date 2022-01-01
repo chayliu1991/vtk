@@ -26,7 +26,29 @@
 #include "vtkTriangleFilter.h"
 #include "vtkDecimatePro.h"
 #include "vtkSmoothPolyDataFilter.h"
-
+#include <vtkSmartPointer.h>
+#include <vtkDICOMImageReader.h>
+#include <vtkNIFTIImageReader.h>
+#include <vtkRenderer.h>
+#include <vtkRenderWindow.h>
+#include <vtkimagedata.h>
+#include <vtkGPUVolumeRayCastMapper.h>
+#include <vtkVolumeProperty.h>
+#include <vtkVolume.h>
+#include <vtkMultiVolume.h>
+#include <vtkPiecewiseFunction.h>
+#include <vtkColorTransferFunction.h>
+#include <vtkNamedColors.h>
+#include <vtkImageAccumulate.h>
+#include <vtkVolumeMapper.h>
+#include <vtkSmartVolumeMapper.h>
+#include <vtkSTLWriter.h>
+#include <vtkImageDataGeometryFilter.h>
+#include <vtkImageMathematics.h>
+#include <vtkImageShiftScale.h>
+#include <vtkOutlineFilter.h>
+#include <vtkPolyDataMapper.h>
+#include <vtkOpenGLGPUVolumeRayCastMapper.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -77,10 +99,16 @@ CMy3DVisualView::CMy3DVisualView()
 	opacityTransferFunction = vtkPiecewiseFunction::New();
 	colorTransferFunction = vtkColorTransferFunction::New();
 	volumeProperty = vtkVolumeProperty::New();	
-	//volumeMapper = vtkVolumeRayCastMapper::New(); //体绘制器	
+	volumeMapper = vtkPolyDataMapper::New(); //体绘制器	
 	volume = vtkVolume::New();//表示透示图中的一组三维数据
 	readerImageCast = vtkImageCast::New();//数据类型转换
 	gradientTransferFunction = vtkPiecewiseFunction::New();
+
+	volumeColor = vtkSmartPointer<vtkColorTransferFunction>::New();
+	volumeGradientOpacity = vtkSmartPointer<vtkPiecewiseFunction>::New();
+	volumeScalarOpacity = vtkSmartPointer<vtkPiecewiseFunction>::New();
+	volume_render = vtkSmartPointer<vtkRenderer>::New();
+	origin_data = vtkSmartPointer<vtkImageData>::New();
 }
 
 CMy3DVisualView::~CMy3DVisualView()
@@ -269,12 +297,12 @@ void CMy3DVisualView::MarchingCubes()
 	//smoothFilter->SetNumberOfIterations(10);//设置平滑的次数
 	//smoothFilter->FeatureEdgeSmoothingOn();	//开启尖锐特征平滑
 
-	//m_McSkinStripper->SetInputConnection(smoothFilter->GetOutputPort());
+	//m_McSkinStripper->SetInputConnection(m_McSkinExtractor->GetOutputPort());
 
 	m_McSkinStripper->SetInputConnection(m_McSkinExtractor->GetOutputPort());
 
 	m_McMapper->ScalarVisibilityOff();
-	//m_McMapper->SetInput(m_McSkinStripper->GetOutput());
+	m_McMapper->SetInputData(m_McSkinStripper->GetOutput());
 	m_McActor->GetProperty()->SetDiffuseColor(0,1,0);
 	m_McActor->GetProperty()->SetSpecular(0.3);     //设置反射率
 	m_McActor->GetProperty()->SetSpecularPower(100); //设置反射光强度 
@@ -357,10 +385,11 @@ void CMy3DVisualView::ChangeMCSpecular(double specular)
 ///////////////////////////////////////
 //RayCasting实现
 //////////////////////////////////////
+
+
 void CMy3DVisualView::RayCasting()
 {
-
-	if(data_fg==1)
+	/*if(data_fg==1)
 	{
 		CMy3DVisualDoc* pDoc = GetDocument();
 		pDoc->Dicomreader->Update();
@@ -387,36 +416,97 @@ void CMy3DVisualView::RayCasting()
 		m_Binsample->SetInputConnection(pDoc->Binreader->GetOutputPort());
 		m_Binsample->Update();		
 		readerImageCast->SetInputConnection(m_Binsample->GetOutputPort());
-
 	}
-		
-	readerImageCast->SetOutputScalarTypeToUnsignedChar();//SetOutputScalarTypeToUnsignedShort ();
-	readerImageCast->ClampOverflowOn();//阀值	
-	//设置不透明度传递函数
-	opacityTransferFunction->AddPoint(30, 0.0);
-	opacityTransferFunction->AddPoint(100, 0.2);
-	opacityTransferFunction->AddPoint(220, 0.8);
-	//设置颜色传递函数//该函数确定体绘像素的颜色值或者灰度值
+*/
+	CMy3DVisualDoc* pDoc = GetDocument();
+	pDoc->Dicomreader->Update();
+	origin_data = pDoc->Dicomreader->GetOutput();
+
+	vtkSmartPointer<vtkOpenGLGPUVolumeRayCastMapper> RcGpuMapper = vtkSmartPointer<vtkOpenGLGPUVolumeRayCastMapper>::New();
+	RcGpuMapper->SetInputData(origin_data);
+
+	int imageDims[3];
+	origin_data->GetDimensions(imageDims);
+	cout << "dimension[] :" << imageDims[0] << " " << imageDims[1] << " " << imageDims[2] << endl;
+	if (imageDims[0] == 0 || imageDims[1] == 0 || imageDims[2] == 0)
+		return;
+
+	////Mapper
+	//vtkSmartPointer<vtkGPUVolumeRayCastMapper> RcGpuMapper = vtkSmartPointer<vtkGPUVolumeRayCastMapper>::New();
+	//RcGpuMapper->SetInputData(origin_data);
+
+	//vtkVolumeProperty
+	volumeProperty->RemoveAllObservers();
+	volumeProperty->SetInterpolationTypeToLinear();
+	volumeProperty->ShadeOn();
+	volumeProperty->SetAmbient(0.1);
+	volumeProperty->SetDiffuse(0.9);
+	volumeProperty->SetSpecular(0.2);
+	volumeProperty->SetSpecularPower(10.0);
+
+	opacityTransferFunction->AddPoint(50, 0.0);
+	opacityTransferFunction->AddPoint(120, 0.5);
+	opacityTransferFunction->AddPoint(200, 1.0);
+	volumeProperty->SetScalarOpacity(opacityTransferFunction);//不透明度
+
 	colorTransferFunction->AddRGBPoint(0.0, 0.5, 0.5, 0.5);//添加色彩点（第一个参数索引）
 	colorTransferFunction->AddRGBPoint(60.0, 0, 1.0, 0.0);
 	colorTransferFunction->AddRGBPoint(150.0, 0, 0, 1);
 	colorTransferFunction->AddRGBPoint(200, 0.8, 0.8, 0.8);	
-	//设置梯度传递函数	
-	gradientTransferFunction->AddPoint(0, 2.0);
-	gradientTransferFunction->AddPoint(60, 2.0);
-	gradientTransferFunction-> AddSegment (128, 0.73, 900, 0.9);
-	gradientTransferFunction->AddPoint(255, 0.1);
+	volumeProperty->SetColor(colorTransferFunction);
 
-	//设定一个体绘容器的属性
-	volumeProperty->SetColor(colorTransferFunction);//设置颜色
-	volumeProperty->SetScalarOpacity(opacityTransferFunction);//不透明度
-	volumeProperty->SetGradientOpacity(gradientTransferFunction);//梯度设置
-	volumeProperty->ShadeOn();//影阴
-	volumeProperty->SetInterpolationTypeToLinear();//直线与样条插值之间逐发函数
-	volumeProperty->SetAmbient(0.2);//环境光系数
-	volumeProperty->SetDiffuse(0.9);//漫反射
-	volumeProperty->SetSpecular(0.2);//高光系数
-	volumeProperty->SetSpecularPower(10); //高光强度
+	//gradientTransferFunction->AddPoint(30, 2.0);
+	//gradientTransferFunction->AddPoint(60, 2.0);
+	//gradientTransferFunction->AddSegment (128, 0.73, 900, 0.9);
+	//gradientTransferFunction->AddPoint(255, 0.1);
+
+	gradientTransferFunction->AddPoint(1, 0.0);
+	gradientTransferFunction->AddPoint(70, 0.5);
+	gradientTransferFunction->AddPoint(130, 1.0);
+
+	volumeProperty->SetGradientOpacity(gradientTransferFunction);
+
+	//volumeProperty->SetScalarOpacity(volumeScalarOpacity);
+
+	//volume
+	volume->RemoveAllObservers();
+	volume->SetMapper(RcGpuMapper);
+	volume->SetProperty(volumeProperty);
+
+	//render
+	volume_render->AddViewProp(volume);
+	mfcWin->GetRenderWindow()->AddRenderer(volume_render);
+	mfcWin->GetRenderWindow()->Render();
+
+
+		
+	//readerImageCast->SetOutputScalarTypeToUnsignedChar();//SetOutputScalarTypeToUnsignedShort ();
+	//readerImageCast->ClampOverflowOn();//阀值	
+	////设置不透明度传递函数
+	//opacityTransferFunction->AddPoint(30, 0.0);
+	//opacityTransferFunction->AddPoint(100, 0.2);
+	//opacityTransferFunction->AddPoint(220, 0.8);
+	////设置颜色传递函数//该函数确定体绘像素的颜色值或者灰度值
+	//colorTransferFunction->AddRGBPoint(0.0, 0.5, 0.5, 0.5);//添加色彩点（第一个参数索引）
+	//colorTransferFunction->AddRGBPoint(60.0, 0, 1.0, 0.0);
+	//colorTransferFunction->AddRGBPoint(150.0, 0, 0, 1);
+	//colorTransferFunction->AddRGBPoint(200, 0.8, 0.8, 0.8);	
+	////设置梯度传递函数	
+	//gradientTransferFunction->AddPoint(0, 2.0);
+	//gradientTransferFunction->AddPoint(60, 2.0);
+	//gradientTransferFunction-> AddSegment (128, 0.73, 900, 0.9);
+	//gradientTransferFunction->AddPoint(255, 0.1);
+
+	////设定一个体绘容器的属性
+	//volumeProperty->SetColor(colorTransferFunction);//设置颜色
+	//volumeProperty->SetScalarOpacity(opacityTransferFunction);//不透明度
+	//volumeProperty->SetGradientOpacity(gradientTransferFunction);//梯度设置
+	//volumeProperty->ShadeOn();//影阴
+	//volumeProperty->SetInterpolationTypeToLinear();//直线与样条插值之间逐发函数
+	//volumeProperty->SetAmbient(0.2);//环境光系数
+	//volumeProperty->SetDiffuse(0.9);//漫反射
+	//volumeProperty->SetSpecular(0.2);//高光系数
+	//volumeProperty->SetSpecularPower(10); //高光强度
 		
 	//if(m_VRAlgorithmType==0)
 	//{
@@ -438,6 +528,8 @@ void CMy3DVisualView::RayCasting()
 	//	iso->SetIsoValue(50);
 	//	volumeMapper->SetVolumeRayCastFunction(iso); 
 	//}
+
+
 	//	
 	//volumeMapper->SetInputConnection(readerImageCast->GetOutputPort());//图像数据输入
 	//volumeMapper->SetNumberOfThreads(3);

@@ -157,21 +157,21 @@ void CMy3DVisualDoc::OnDicomopen()
 	CDlgDicomOpen m_DlgDicomImport;
 	if(m_DlgDicomImport.DoModal() == IDOK)
 	{
-		/*Dicomreader =  vtkSmartPointer<vtkDICOMImageReader>::New(); 
+		Dicomreader =  vtkSmartPointer<vtkDICOMImageReader>::New(); 
 		Dicomreader->SetDirectoryName(m_DlgDicomImport.m_DicomFolderName);
 		Dicomreader->Update();	
-*/
-		m_pNrrdReader = vtkSmartPointer<vtkNrrdReader>::New();
+
+	/*	m_pNrrdReader = vtkSmartPointer<vtkNrrdReader>::New();
 		m_pNrrdReader->CanReadFile(m_DlgDicomImport.m_DicomFolderName);
-		m_pNrrdReader->Update();
+		m_pNrrdReader->Update();*/
 
 
 		
 		data_fg = 1;//等于1时表示当前的数据类型为Dicom
 		Dicom_fg = true;
 		Bmp_fg = false;
-	/*	SetDicomSlice();
-		InitSliceDlg();*/
+		SetDicomSlice();
+		InitSliceDlg();
 	}
 	else
 		return;

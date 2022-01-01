@@ -62,7 +62,7 @@ void CDlgDicomOpen::OnBnClickedBtndicomopen()
 	CString FilePathName = "";
 	CString FolderName = "";
 	CFileDialog fileDlg( TRUE, NULL, NULL,OFN_ALLOWMULTISELECT | OFN_ENABLESIZING | OFN_HIDEREADONLY,
-		(LPCTSTR)_TEXT("NRRD Files (*.nrrd)|*.nrrd||"),NULL );
+		(LPCTSTR)_TEXT("DICOM Files (*.dcm)|*.dcm||"),NULL );
 
 	const int MIN_FILE_NUMBER = 2000;     
 	fileDlg.m_ofn.lpstrFile = new TCHAR[_MAX_PATH * MIN_FILE_NUMBER]; //重新定义缓冲区大小          
@@ -84,5 +84,6 @@ void CDlgDicomOpen::OnBnClickedBtndicomopen()
 	}
 	else
 		return;
+
 	delete[] fileDlg.m_ofn.lpstrFile;     
 }

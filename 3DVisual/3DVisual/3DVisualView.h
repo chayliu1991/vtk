@@ -107,12 +107,18 @@ public:
 	void ChangeMCSpecularColor(float r,float g,float b);
 public:
 	//ÃÂªÊ÷∆RayCastingÀ„∑®
+	vtkSmartPointer<vtkColorTransferFunction> volumeColor;
+	vtkSmartPointer<vtkPiecewiseFunction> volumeGradientOpacity;
+	vtkSmartPointer<vtkPiecewiseFunction> volumeScalarOpacity;
+	vtkSmartPointer<vtkRenderer> volume_render;
+	vtkSmartPointer<vtkImageData> origin_data;
+
 	void RayCasting();
 	vtkRenderer* m_VrRender;
 	vtkPiecewiseFunction *opacityTransferFunction;
 	vtkColorTransferFunction *colorTransferFunction;
 	vtkVolumeProperty *volumeProperty ;	
-	//vtkVolumeRayCastMapper *volumeMapper ;
+	vtkPolyDataMapper *volumeMapper ;
 
 	vtkVolume *volume;
 	vtkImageCast *readerImageCast;

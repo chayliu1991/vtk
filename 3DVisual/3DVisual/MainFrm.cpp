@@ -416,8 +416,8 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 
 	if(!m_splitWnd.CreateStatic(this,2,1))
 		return FALSE;
-	m_splitWnd.CreateView(0,0,RUNTIME_CLASS(CMy3DVisualView),CSize(rect.Width(),rect.Height()),pContext);	
-	m_splitWnd.CreateView(1,0,RUNTIME_CLASS(CBttmView),CSize(rect.Width(),rect.Height()*0),pContext);	
+	m_splitWnd.CreateView(0,0,RUNTIME_CLASS(CMy3DVisualView),CSize(rect.Width(),rect.Height()*2/3),pContext);	
+	m_splitWnd.CreateView(1,0,RUNTIME_CLASS(CBttmView),CSize(rect.Width(),rect.Height()*1/3),pContext);	
 	return true;	
 }
 
@@ -439,6 +439,7 @@ void CMainFrame::Capture(int ntype)
 	}
 	else
 		return;	
+
 	CMainFrame*   pFrame=(CMainFrame*)AfxGetMainWnd();   	
 	CMy3DVisualView* pTtmview = (CMy3DVisualView*)(pFrame->m_splitWnd.GetPane(0,0));
 	CBttmView* pBtmview = (CBttmView*)(pFrame->m_splitWnd.GetPane(1,0));
